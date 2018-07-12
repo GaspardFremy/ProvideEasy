@@ -1,11 +1,6 @@
 <template lang="html">
-
 <div>
-
   <h6 class="title primary--text pa-4">Clients Board</h6>
-
-  <!-- <notifications group="auth"/> -->
-
  <v-container grid-list>
      <v-layout row justify-center>
        <v-dialog v-model="dialog" persistent max-width="500px">
@@ -24,7 +19,6 @@
                      required>
                      </v-text-field>
                  </v-flex>
-
                  <v-flex xs12 sm6 md4>
                    <v-text-field
                     v-model="legalName"
@@ -33,7 +27,6 @@
                     hint="example of helper text only on focus">
                     </v-text-field>
                  </v-flex>
-
                  <v-flex xs12 sm6 md4>
                    <v-text-field
                      v-model="siret"
@@ -42,7 +35,6 @@
                      required>
                      </v-text-field>
                  </v-flex>
-
                  <v-flex xs12>
                    <v-text-field
                     v-model="address"
@@ -50,7 +42,6 @@
                     required>
                    </v-text-field>
                  </v-flex>
-
                  <v-flex xs12>
                    <v-text-field
                     v-model="phone"
@@ -59,7 +50,6 @@
                     required>
                    </v-text-field>
                  </v-flex>
-
                  <v-flex xs12 sm6>
                    <v-select
                      :items="sector"
@@ -68,16 +58,13 @@
                      v-model="sector"
                    ></v-select>
                  </v-flex>
-
                  <v-flex xs12>
                    <v-text-field
                     v-model="email"
                     label="Email"
                     :rules="[rules.email]"
-
                     required></v-text-field>
                  </v-flex>
-
                  <v-flex xs12>
                   <v-text-field
                     v-model="password"
@@ -90,7 +77,6 @@
                     :type="show1 ? 'text' : 'password'"
                   ></v-text-field>
                 </v-flex>
-
                  <v-flex xs12 sm12>
                  <v-text-field
                    :append-icon="show4 ? 'visibility_off' : 'visibility'"
@@ -103,7 +89,6 @@
                    :type="show4 ? 'text' : 'password'"
                  ></v-text-field>
                  </v-flex>
-
                </v-layout>
              </v-container>
            </v-card-text>
@@ -117,7 +102,7 @@
      </v-layout>
  </v-container>
 
-  <v-container  fluid fill-height>
+  <v-container fluid fill-height>
       <v-layout row>
           <v-flex xs12 sm10 md12>
               <v-data-table
@@ -139,16 +124,13 @@
           </v-flex>
       </v-layout>
   </v-container>
-
 </div>
-
 </template>
 
-
 <script>
+
 import { mapGetters } from 'vuex'
 import Notifications from 'vue-notification'
-
 
   export default {
 
@@ -159,17 +141,21 @@ import Notifications from 'vue-notification'
         ])
     },
 
+
     created () {
         this.$store.dispatch('loadClients')
     },
 
+
     watch: {
        notification: function () {
-               this.showNotif()
+            this.showNotif()
        }
      },
 
+
     methods : {
+
         showNotif(){
             this.$notify({
               group: 'auth',
@@ -180,6 +166,7 @@ import Notifications from 'vue-notification'
               text: this.notification.data.message
             });
         },
+
         submitNewClient(){
             let clientInfo = {
                 name : this.name,
@@ -194,7 +181,6 @@ import Notifications from 'vue-notification'
             }
             this.$store.dispatch('submitNewClient', clientInfo)
             this.$store.dispatch('loadClients')
-
             this.password = "null"
             this.confirmPassword = "null"
             this.phone = null
@@ -206,6 +192,7 @@ import Notifications from 'vue-notification'
             this.sector = null
         },
     },
+
 
     data: () => ({
         show1: false,
@@ -240,13 +227,13 @@ import Notifications from 'vue-notification'
                     return 'au moins 5 caractères'
                 }
               },
-              // passMatch: v =>  v === this.password || 'les mots de passe ne correspondent pas'
-              // passMatch (val) {
-              //     if (this.password != val ) {
-              //         return 'les mots de passe ne correspondent pas'
-              //     }
-              // }
-              // todo: confirm password rule don"t work.
+            // passMatch: v =>  v === this.password || 'les mots de passe ne correspondent pas'
+            // passMatch (val) {
+            //     if (this.password != val ) {
+            //         return 'les mots de passe ne correspondent pas'
+            //     }
+            // }
+            // todo: confirm password rule don't work.
         },
         dialog: false,
         headers: [
@@ -258,14 +245,14 @@ import Notifications from 'vue-notification'
             { text: 'Siret', value: 'siret' },
             { text: 'Secteur', value: 'types' },
             { text: 'Date ajout', value: 'types' },
-      ],
+        ],
     })
 }
 
 </script>
 
 <style media="screen">
-.vue-notification {
-    padding: 15px;
-}
+    .vue-notification {
+        padding: 15px;
+    }
 </style>

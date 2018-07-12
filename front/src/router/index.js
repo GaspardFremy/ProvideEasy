@@ -5,7 +5,7 @@ import {Bar} from 'vue-chartjs'
 
 // CLIENTS ROUTES
 import Order from '@/components/order/clientOrder'
-import SavedOrder from '@/components/order/clientOrder'
+import SavedOrder from '@/components/order/clientSavedOrders'
 import Profile from '@/components/profile/profile'
 import ClientProfile from '@/components/profile/clientProfile'
 import ProfileSettings from '@/components/profile/profileSettings'
@@ -16,13 +16,9 @@ import StoreOrders from '@/components/order/storeOrders'
 import SalesBoard from '@/components/dashboards/salesBoard'
 import ClientsBoard from '@/components/dashboards/clientsBoard'
 import InvoicesBoard from '@/components/dashboards/invoicesBoard'
-import SalesGraph from '@/components/dashboards/salesGraph'
 
 // TEST
-import Test from '@/components/test/test'
 import Charts from '@/components/examples/charts'
-
-
 
 Vue.use(Router)
 
@@ -92,16 +88,13 @@ export default new Router({
         props: true,
         component: Profile,
         },
+
+        // TESTING ROUTES
         {
         path: '/charts',
         name: 'charts',
         component: Charts,
         },
-        {
-        path: '/test',
-        name: 'test',
-        component: Test
-        }
   ],
       mode: 'history'
 })

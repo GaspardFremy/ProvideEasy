@@ -1,7 +1,7 @@
 <script>
-//Importing Line class from the vue-chartjs wrapper
+
 import {Line, mixins} from 'vue-chartjs'
-//Exporting this so it can be used in other components
+
 export default Line.extend({
   data () {
     return {

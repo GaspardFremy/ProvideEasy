@@ -2,7 +2,6 @@
     <div class="">
         <v-layout row wrap align-content-center>
             <h6 class="title primary--text pa-4 pl-1">Nouvelle Commande</h6>
-            <!-- <p class="subtitle secondary--text pl-4">Cliquez sur l'icon <v-icon color="success">photo_camera</v-icon> pour voir la photo</p> -->
             <div class="pa-3">
                 <v-dialog
                 v-model="dialog1"
@@ -16,9 +15,7 @@
                     <v-card>
                         <v-card-title
                         class="headline grey lighten-2 text-xs-cente"
-                        primary-title>
-                            Comment utiliser l'interface
-                        </v-card-title>
+                        primary-title>Comment utiliser l'interface </v-card-title>
 
                         <v-card-text>
                             1. selectionez une catégorie. <br><br>
@@ -50,7 +47,6 @@
             </div>
         </v-layout>
 
-
         <v-container grid-list-xs,sm,md,lg,xl>
             <v-layout>
                 <v-flex xs12>
@@ -60,59 +56,44 @@
                     <v-btn flat color="primary" outline @click='switchCategory("autre")'><img src="@/assets/icon/autre.png" class="category_icon pr-3 pl-0">Autres</v-btn>
                 </v-flex>
             </v-layout>
-            <v-container   grid-list-xs>
+            <v-container  grid-list-xs>
                 <v-layout row wrap>
                     <v-flex xs9>
-                        <!-- <v-layout row wrap> -->
-                                <draggable element="v-layout" wrap  v-model="products" :options="{group:'panier'}" @start="drag=false"  :ghmove="checkMove" class="xs-3">
-                                    <v-flex v-for="product in products" xs3 justify-space-around class="ma-1">
-
-                                        <v-card class="products product_card" >
-
-
-
-                                                    <v-card-title primary-title>
-                                                      <v-flex  xs8>
-                                                          <div class="card_info subheading">{{product.name}}</div>
-                                                           <template v-if="product.name.length < 15"><br></template>
-
-                                                          <div class="card_info subheading pt-3">{{product.price}}€</div>
-                                                          <p>total : {{Math.round((product.quantity * product.price) * 100) / 100}} €</p>
-                                                      </v-flex>
-
-                                                      <v-spacer></v-spacer>
-
-                                                      <v-flex primary-title xs4>
-
-                                                          <v-layout>
-                                                              <v-flex offset-xs5>
-                                                                  <v-tooltip bottom>
-                                                                     <v-icon slot="activator" dark color="info" class="camera">photo_camera</v-icon>
-                                                                     <span><img :src="getPic(product.imgURL)" alt="">  </span>
-                                                                  </v-tooltip>
-                                                              </v-flex>
-                                                          </v-layout>
-
-
-
-                                                          <v-layout class="mt-2">
-                                                              <v-select
-                                                               :items="productAmount"
-                                                               v-model="product.quantity"
-                                                               label="0"
-                                                               single-line
-                                                               append-icon="add_circle_outline"
-                                                               @change="appendProduct(product)"
-                                                             ></v-select>
-                                                          </v-layout>
-
-                                                      </v-flex>
-
-                                                    </v-card-title>
-                                        </v-card>
-                                  </v-flex>
-                            </draggable>
-                        <!-- </v-layout> -->
+                        <draggable element="v-layout" wrap  v-model="products" :options="{group:'panier'}" @start="drag=false"  :ghmove="checkMove" class="xs-3">
+                            <v-flex v-for="product in products" xs3 justify-space-around class="ma-1">
+                                <v-card class="products product_card" >
+                                    <v-card-title primary-title>
+                                        <v-flex  xs8>
+                                          <div class="card_info subheading">{{product.name}}</div>
+                                          <template v-if="product.name.length < 15"><br></template>
+                                          <div class="card_info subheading pt-3">{{product.price}}€</div>
+                                          <p>total : {{Math.round((product.quantity * product.price) * 100) / 100}} €</p>
+                                        </v-flex>
+                                        <v-spacer></v-spacer>
+                                        <v-flex primary-title xs4>
+                                          <v-layout>
+                                              <v-flex offset-xs5>
+                                                  <v-tooltip bottom>
+                                                     <v-icon slot="activator" dark color="info" class="camera">photo_camera</v-icon>
+                                                     <span><img :src="getPic(product.imgURL)" alt="">  </span>
+                                                  </v-tooltip>
+                                              </v-flex>
+                                          </v-layout>
+                                          <v-layout class="mt-2">
+                                              <v-select
+                                               :items="productAmount"
+                                               v-model="product.quantity"
+                                               label="0"
+                                               single-line
+                                               append-icon="add_circle_outline"
+                                               @change="appendProduct(product)"
+                                             ></v-select>
+                                          </v-layout>
+                                        </v-flex>
+                                    </v-card-title>
+                                </v-card>
+                            </v-flex>
+                        </draggable>
                     </v-flex>
 
                     <v-flex xs3>
@@ -171,7 +152,6 @@
                                       readonly></v-text-field>
                                     <v-date-picker v-model="date" :allowed-dates="allowedDates" @input="$refs.menu2.save(date)"></v-date-picker>
                                 </v-menu>
-
                                 <v-menu
                                 ref="menu"
                                 :close-on-content-click="false"
@@ -209,12 +189,9 @@
                                         <td><span class="title pl-5">{{getTotalReduc(getTotalTTC(this.totalCart))}} €</span></td>
                                       </tr>
                                 </table>
-
                                 <v-layout class="mt-5"row justify-center>
                                     <v-dialog v-model="dialog" persistent max-width="290">
                                       <v-btn :disabled='!cartIsNotEmpty()' slot="activator" color="primary" class="white--text">passer commande</v-btn>
-
-
                                       <v-card>
                                         <v-container v-if="!cartIsNotEmpty()">
                                             <p>Veuillez remplire le panier, renseigner une date et une heure de livraison <br>  </p>
@@ -223,7 +200,6 @@
 
                                         <div v-else>
                                             <v-card-title class="title pb-2">Détail de la commande</v-card-title>
-
                                             <v-container>
                                                 <v-layout row wrap v-for='product in cart'>
                                                     <v-flex>
@@ -236,9 +212,6 @@
                                                         <p>Pour le 12/08 à 19h</p>
                                                     </v-flex>
                                                 </v-layout>
-
-
-
                                                 <div @click="showInput = !showInput">
                                                     <v-checkbox
                                                      class="check"
@@ -261,7 +234,6 @@
                                                    </div>
                                                   </transition>
                                             </v-container>
-
                                             <v-card-actions>
                                                 <v-layout justify-space-around>
                                                     <v-flex>
@@ -273,9 +245,7 @@
                                                 </v-layout>
                                             </v-card-actions>
                                         </div>
-
                                       </v-card>
-
                                     </v-dialog>
                                 </v-layout>
                             </v-container>
@@ -285,21 +255,21 @@
             </v-container>
         </v-container>
     </div>
-
 </template>
 
 <script>
-import Card from '@/components/order/card'
+
 import draggable from 'vuedraggable'
 import { mapGetters } from 'vuex'
-import { mapState } from 'vuex'
-
 
 export default {
+
+
     components: {
-        'app-card' : Card,
         draggable
     },
+
+
     data(){
         return {
             orderName: null,
@@ -322,17 +292,21 @@ export default {
             ]
         }
     },
+
+
     created () {
         this.$store.dispatch('loadProducts', 'pains')
     },
+
+
     computed: {
-        ...mapState([
-           'products'
-        ]),
+
         ...mapGetters([
-        'totalCart',
-        'user'
+            'totalCart',
+            'user',
+            'products'
         ]),
+
         cart: {
             get() {
                 return this.$store.state.cart
@@ -341,6 +315,7 @@ export default {
                 this.$store.commit('setCart', value)
             }
         },
+
         products: {
             get() {
                 return this.$store.state.products
@@ -349,6 +324,7 @@ export default {
                 this.$store.commit('setProducts', value)
             }
         },
+
         dragOptions () {
            return  {
              animation: 0,
@@ -359,18 +335,21 @@ export default {
                },
             };
          },
+
         getId(product) {
             console.log('ok');
         }
     },
+
+
     methods: {
+
         switchCategory(payload){
             this.$store.dispatch('loadProducts', payload)
         },
 
         appendProduct: function(value){
-            console.log(value.quantity);
-                this.$store.commit('setCartBySelect', value);
+            this.$store.commit('setCartBySelect', value);
         },
 
         removed: function(index, productId) {
@@ -404,6 +383,7 @@ export default {
         allowedDates: function allowedDates(val) {
             return ![1].includes(new Date(val).getDay());
         },
+
         takeOrder(payload){
             let order = {
                 products : payload,
@@ -415,10 +395,12 @@ export default {
             }
             this.$store.dispatch('takeOrder', order)
         },
+
         cartIsNotEmpty(){
             return this.cart.length > 0 && this.date != null && this.time != null
 
         },
+
         getPic(imgURL) {
              return require('@/assets/products/' + imgURL + '.jpg')
         },
@@ -430,17 +412,17 @@ export default {
         getTotalReduc(total) {
             return Math.round((total - (total * 10/100)) * 100) / 100
         },
-
-
     },
+
+
      watch: {
        isDragging (newValue) {
          if (newValue){
-           this.delayedDragging= true
+           this.delayedDragging = true
            return
          }
          this.$nextTick( () =>{
-              this.delayedDragging =false
+              this.delayedDragging = false
          })
        }
     },
@@ -449,82 +431,56 @@ export default {
 </script>
 
 <style lang="css">
-.card_info {
-    color: #9A9A9A;
-}
+    .card_info {
+        color: #9A9A9A;
+    }
 
-.input-group__details {
-    display: none;
-}
+    .input-group__details {
+        display: none;
+    }
 
-.input-group--select .input-group__selections {
-    width: 20px;
-}
+    .input-group--select .input-group__selections {
+        width: 20px;
+    }
 
-.card__title{
-    padding: 10px;
-}
+    .card__title{
+        padding: 10px;
+    }
 
-.card__title--primary{
-    padding: 10px;
-}
+    .card__title--primary{
+        padding: 10px;
+    }
 
-.btn--floating{
-    height: 20px;
-    width: 20px;
-}
+    .btn--floating{
+        height: 20px;
+        width: 20px;
+    }
 
-.products {
-    /* min-width: 120%; */
-}
+    .drag_here {
+        border: 1px dashed #635BCF;
+        padding: 10px;
+        margin: 10px;
+    }
 
-.drag_here {
-    border: 1px dashed #635BCF;
-    padding: 10px;
-    margin: 10px;
-}
+    .product_card {
+        min-width: 210px;
+        min-height: 150px;
+    }
 
-.product_card {
-    min-width: 210px;
-    min-height: 150px;
-}
+    .category_icon {
+        height: 20px;
+    }
 
-.category_icon {
-    height: 20px;
-}
+    .check label {
+        font-size: 13px;
+    }
 
-.check label {
-    font-size: 13px;
-}
+    .remove_btn {
+        width: 25px !important;
+        height: 25px !important;
+    }
 
-.remove_btn {
-    width: 25px !important;
-    height: 25px !important;
-}
-
-.camera {
-    padding-bottom: 15px;
-}
-
-.borderLeft {
-    /* border-left: 1px solid grey; */
-}
+    .camera {
+        padding-bottom: 15px;
+    }
 </style>
-
-
-<!--
-
-methods : {
-    submitNewClient(){
-        let clientInfo = {
-            password: this.password,
-            confirmPassword: this.confirmPassword,
-            nom : this.nom,
-            email : this.email,
-            siret : this.siret,
-            adresse : this.adresse,
-            raisonSocial : this.raisonSocial,
-        }
-        console.log(clientInfo);
-        this.$store.commit('submitNewClient', clientInfo),
-    }, -->

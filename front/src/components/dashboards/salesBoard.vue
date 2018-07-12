@@ -1,13 +1,7 @@
-
 <template lang="html">
-
-<div>
-
+    <div>
         <h6 class="title primary--text pt-4 pl-4">Sales Board</h6>
-
-
         <v-container fluid grid-list-xl>
-
             <v-layout row align-content-space-between wrap>
                 <v-flex xs6 sm3>
                     <v-card hover color="success" class="white--text">
@@ -17,7 +11,6 @@
                         </v-container>
                     </v-card>
                 </v-flex>
-
                 <v-flex xs6 sm3>
                     <v-card hover color="accent" class="white--text">
                         <v-container class="text-sm-center">
@@ -26,7 +19,6 @@
                         </v-container>
                     </v-card>
                 </v-flex>
-
                 <v-flex xs6 sm3>
                     <v-card hover color="info" class="white--text">
                         <v-container class="text-sm-center">
@@ -35,7 +27,6 @@
                         </v-container>
                     </v-card>
                 </v-flex>
-
                 <v-flex xs6 sm3>
                     <v-card hover color="purple" class="white--text">
                         <v-container class="text-sm-center">
@@ -45,19 +36,15 @@
                     </v-card>
                 </v-flex>
             </v-layout>
-
             <v-layout row wrap>
                 <v-flex xs12 sm9>
                     <div>
                         <line-chart
                         :chart-data="datacollection"
-
                         :height="200">
                         </line-chart>
                     </div>
-
                 </v-flex>
-
                 <v-flex xs12 sm3>
                     <v-card>
                         <v-card>
@@ -65,20 +52,8 @@
                                 <v-divider></v-divider>
                                 <v-list dense>
                                     <v-list-tile v-for="item in topClients" class="list_items container-flex">
-
-
-
-                                                    <div>
-                                                        {{item.name}}
-                                                    </div>
-                                                    <div>
-                                                        {{item.revenues}}
-                                                    </div>
-
-                                                <!-- <v-list-tile-content>{{item.name}}</v-list-tile-content>
-                                                <v-list-tile-content class="price">{{item.revenues}}</v-list-tile-content> -->
-
-
+                                        <div>{{item.name}}</div>
+                                        <div>{{item.revenues}}</div>
                                     </v-list-tile>
                                 </v-list>
                             </v-card>
@@ -86,67 +61,70 @@
                 </v-flex>
             </v-layout>
         </v-container>
-
     </div>
-
 </template>
 
 
-
-
 <script>
-  import LineChart from './LineChart.js'
+
+  import LineChart from './charts/LineChart.js'
   import { mapGetters } from 'vuex'
 
   export default {
+
+
     components: {
       LineChart
     },
+
+
     computed: {
         ...mapGetters([
         'topClients'
         ])
     },
+
+
     data () {
-   return {
-     datacollection: {
-       labels: ['January', 'February', 'March', 'April', 'May'],
-       datasets: [
-         {
-           label: 'revenues',
-           backgroundColor: '#60D3A0',
-           data: [120, 100, 140, 150, 120, 145]
-           },
-           {
-             label: 'Profit',
-             backgroundColor: '#019AE8',
-             data: [130, 110, 128, 110, 190, 145]
-           }
-       ]
-     }
-   }
- },
- mounted () {
-   this.renderChart(this.datacollection, {responsive: true, maintainAspectRatio: false})
- }
+        return {
+            datacollection: {
+                labels: ['January', 'February', 'March', 'April', 'May'],
+                datasets: [
+                    {
+                        label: 'revenues',
+                        backgroundColor: '#60D3A0',
+                        data: [120, 100, 140, 150, 120, 145]
+                    },
+                    {
+                        label: 'Profit',
+                        backgroundColor: '#019AE8',
+                        data: [130, 110, 128, 110, 190, 145]
+                    }
+                ]
+            }
+        }
+    },
+
+    mounted () {
+        this.renderChart(this.datacollection, {responsive: true, maintainAspectRatio: false})
+    },
 }
 </script>
 
 <style>
-  .small {
-    max-width: 100%;
-    margin:  300px;
-  }
+    .small {
+        max-width: 100%;
+        margin:  300px;
+    }
 
-  .list_items {
-      border-bottom: 1px solid #60D3A0;
-      width: 90%;
-      margin: auto;
-  }
+    .list_items {
+        border-bottom: 1px solid #60D3A0;
+        width: 90%;
+        margin: auto;
+    }
 
-  .container-flex {
-      display: flex;
-      justify-content: space-between;
-  }
-
+    .container-flex {
+        display: flex;
+        justify-content: space-between;
+    }
 </style>

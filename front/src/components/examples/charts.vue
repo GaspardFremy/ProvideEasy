@@ -1,31 +1,27 @@
 <template lang="html">
-
-<div>
-  <h6 class="title primary--text pa-4">Charts examples</h6>
-
-  <v-flex xs12>
+    <div>
+    <h6 class="title primary--text pa-4">Charts examples</h6>
+    <v-flex xs12>
       <lineChart/>
-  </v-flex>
-  <v-flex xs12>
+    </v-flex>
+    <v-flex xs12>
       <barChart/>
-  </v-flex>
-  <v-flex xs12>
+    </v-flex>
+    <v-flex xs12>
       <bubbleChart/>
-  </v-flex>
-  <v-flex xs4>
+    </v-flex>
+    <v-flex xs4>
       <pieChart/>
-  </v-flex>
-</div>
-
+    </v-flex>
+    </div>
 </template>
 
 <script>
+
 import lineChart from '../dashboards/charts/lineChart'
 import barChart from '../dashboards/charts/barChart'
 import bubbleChart from '../dashboards/charts/bubbleChart'
 import pieChart from '../dashboards/charts/pieChart'
-
-// import reactive from './charts/reactive'
 
 export default {
     name: 'VueChartJS',
@@ -36,6 +32,5 @@ export default {
       pieChart
     }
   }
-
 
 </script>

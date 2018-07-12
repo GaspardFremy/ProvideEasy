@@ -10,7 +10,6 @@
           app
           class="header"
           dark>
-
         <v-list>
             <v-list-tile>
                 <v-list-tile-action>
@@ -18,9 +17,7 @@
                 </v-list-tile-action>
                 <v-list-tile-title class="title"><router-link to='/' tag='span' style="cursor:pointer">MAISON LANDEMAINE</router-link></v-list-tile-title>
             </v-list-tile>
-
             <v-divider></v-divider>
-
             <v-list-group
                 prepend-icon="store_mall_directory"
                 value="false">
@@ -38,9 +35,7 @@
                     <v-list-tile-title v-text="item.title"></v-list-tile-title>
                 </v-list-tile>
             </v-list-group>
-
             <v-divider></v-divider>
-
             <v-list-group
                 prepend-icon="dashboard"
                 value="false">
@@ -57,9 +52,7 @@
                     <v-list-tile-title v-text="item.title"></v-list-tile-title>
                 </v-list-tile>
             </v-list-group>
-
             <v-divider></v-divider>
-
             <v-list-group
                 prepend-icon="shopping_cart"
                 value="false">
@@ -76,9 +69,7 @@
                     <v-list-tile-title v-text="item.title"></v-list-tile-title>
                 </v-list-tile>
             </v-list-group>
-
             <v-divider></v-divider>
-
             <v-list-group class="pt-2"
                 prepend-icon="person"
                 value="true">
@@ -94,19 +85,14 @@
                 <v-list-tile-title v-text="client.name"></v-list-tile-title>
                 </v-list-tile>
             </v-list-group>
-
             <v-divider></v-divider>
-
         </v-list>
-
         </v-navigation-drawer>
-
         <v-toolbar
         dark
         app
         :clipped-left="clipped"
         class="header">
-
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
             <v-btn icon @click.stop="miniVariant = !miniVariant">
                 <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
@@ -118,54 +104,62 @@
 </template>
 
 <script>
+
 import { mapGetters } from 'vuex'
 import { mapState } from 'vuex'
 
-
 export default {
-  data () {
-    return {
-        clipped: false,
-        drawer: true,
-        items: [{
-            icon: 'shopping_cart',
-            title: 'Order',
-        },
-        {
-            icon: 'insert_chart',
-            title: 'Invoice'
-        }],
-        miniVariant: false,
-        right: true,
-        rightDrawer: true,
-        menuUserActions: [
-            {icon: 'receipt', title: 'orders', link: '/store/orders'},
-            {icon: 'account_circle', title: 'profil', link: '/profile'},
-            {icon: 'settings', title: 'settings', link: '/profile/settings'},
-        ],
-        menuOrderActions: [
-            {icon: 'add_shopping_cart', title: 'New Order', link: '/new/order'},
-            {icon: 'restore', title: 'Saved Order', link: '/new/savedorder'},
-        ],
-        archivedMonth : ['January', 'Febuary', 'March', 'April', 'May'],
-        dashboardsList : [
-            {title : 'Sales Board', icon: 'attach_money', link : '/dashboard/salesboard'},
-            {title : 'Clients Board', icon: 'perm_contact_calendar', link : '/dashboard/clientsboard'},
-            {title : 'Invoices Board', icon: 'import_contacts', link : '/dashboard/invoicesboard'},
-        ]
-    }
-  },
-    computed: {
-    ...mapGetters([
-          'clients'
-        ]),
-        ...mapState([
-        'user'
-        ]),
-        totalClients: function () {
-          return this.clients.length
+
+    data () {
+        return {
+            clipped: false,
+            drawer: true,
+            items: [{
+                icon: 'shopping_cart',
+                title: 'Order',
+            },
+            {
+                icon: 'insert_chart',
+                title: 'Invoice'
+            }],
+            miniVariant: false,
+            right: true,
+            rightDrawer: true,
+            menuUserActions: [
+                {icon: 'receipt', title: 'orders', link: '/store/orders'},
+                {icon: 'account_circle', title: 'profil', link: '/profile'},
+                {icon: 'settings', title: 'settings', link: '/profile/settings'},
+            ],
+            menuOrderActions: [
+                {icon: 'add_shopping_cart', title: 'New Order', link: '/new/order'},
+                {icon: 'restore', title: 'Saved Order', link: '/new/savedorder'},
+            ],
+            archivedMonth : ['January', 'Febuary', 'March', 'April', 'May'],
+            dashboardsList : [
+                {title : 'Sales Board', icon: 'attach_money', link : '/dashboard/salesboard'},
+                {title : 'Clients Board', icon: 'perm_contact_calendar', link : '/dashboard/clientsboard'},
+                {title : 'Invoices Board', icon: 'import_contacts', link : '/dashboard/invoicesboard'},
+            ]
         }
     },
+
+
+    computed: {
+
+        ...mapGetters([
+            'clients'
+        ]),
+
+        ...mapState([
+            'user'
+        ]),
+
+        totalClients: function () {
+            return this.clients.length
+        }
+    },
+
+
     created () {
         this.$store.dispatch('loadClients')
     },

@@ -1,9 +1,6 @@
 <template lang="html">
     <div>
-        <!-- <clientMenu></clientMenu> -->  
-
         <h6 class="title primary--text pa-4">Current Invoice</h6>
-
         <v-layout row>
             <v-flex xs12 sm10 offset-sm1>
                 <v-tabs
@@ -11,7 +8,6 @@
                 color="info"
                 show-arrows
                 class="elevation-1">
-
                     <v-tabs-slider class="waring"></v-tabs-slider>
                     <v-tab
                     v-for="i in 30"
@@ -36,7 +32,6 @@
                                   <td>{{ props.item.price }}</td>
                                   <td>{{ getTotalRow }}</td>
                                 </template>
-
                                 <template slot="footer">
                                  <td colspan="100%">
                                      <table class="mt-5">
@@ -47,7 +42,6 @@
                                           <v-spacer class="mt-1"></v-spacer>
                                           <tr>
                                              <td><span>PRIX TTC <br> (TVA 5,5%) : </span></td>
-                                             <!-- <td><span class="subtitle pl-5">{{Math.round( ((this.totalCart * 5.5 / 100) + this.totalCart ) * 100) / 100}}  €</span></td> -->
                                              <td><span class="subtitle pl-1"> 10,55 €</span></td>
                                            </tr>
                                            <v-spacer class="mt-1"></v-spacer>
@@ -58,11 +52,8 @@
                                      </table>
                                  </td>
                                </template>
-
-
                               </v-data-table>
                             </template>
-
                         </v-card-text>
                         </v-card>
                         </v-tab-item>
@@ -70,10 +61,7 @@
                 </v-tabs>
             </v-flex>
         </v-layout>
-
-
     </div>
-
 </template>
 
 <script>
@@ -90,34 +78,24 @@
           { text: 'Amount', value: 'amount' },
           { text: 'Unit Price', value: 'price' },
           { text: 'Total', value: 'total' },
-
         ],
         values: [
             {
-            value: false,
-            name: 'Baguette',
-            price: 1,
-            amount: 6,
-            total: 9
+                value: false,
+                name: 'Baguette',
+                price: 1,
+                amount: 6,
+                total: 9
             },
             {
-            value: false,
-            name: 'Baguette tradition',
-            price: 1.2,
-            amount: 20,
-            total: 9
+                value: false,
+                name: 'Baguette tradition',
+                price: 1.2,
+                amount: 20,
+                total: 9
             }
         ]
       }
-    },
-    computed: {
-        getTotalRow: function () {
-            // return Math.round((this.values[0].price * this.values[0].amount) * 100) / 100;
-            return
-        }
     }
   }
 </script>
-
-<style lang="css">
-</style>
