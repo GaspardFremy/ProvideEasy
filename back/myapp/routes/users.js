@@ -16,24 +16,6 @@ router.post('/new/client', function(req, res, next) {
     let email = req.body.clientInfo.email;
     let password = req.body.clientInfo.password;
     let storeId = 1;
-    let typeId = null;
-
-    switch (sector) {
-      case 'restaurant':
-        typeId = 1
-        break;
-
-        case 'hôtel':
-        typeId = 2
-        break;
-
-        case 'entreprise':
-        typeId = 3
-        break;
-
-      default:
-        typeId = 1
-    }
 
     database.sendQuery(`SELECT * FROM clients WHERE email LIKE '${email}'`, function (err, result) {
         if (err) {
@@ -57,7 +39,7 @@ router.post('/new/client', function(req, res, next) {
                             siret,
                             address,
                             phone,
-                            typeId,
+                            sector,
                             storeId,
                             email,
                             password,
@@ -68,7 +50,7 @@ router.post('/new/client', function(req, res, next) {
                             '${siret}',
                             '${address}',
                             '${phone}',
-                            '${typeId}',
+                            '${sector}',
                             '${storeId}',
                             '${email}',
                             '${hash}',
@@ -95,11 +77,7 @@ router.post('/new/client', function(req, res, next) {
 
 /* GET all clients. */
 router.get('/clients', function(req, res, next) {
-    database.sendQuery(`SELECT
-                            clients.*,
-                            clientsTypes.types as typeId 
-                        FROM clients
-                        LEFT JOIN clientsTypes ON clientsTypes.id = clients.typeId`, function (err, results){
+    database.sendQuery(`SELECT * FROM clients`, function (err, results){
         if(err){
             console.log(err);
         }else {

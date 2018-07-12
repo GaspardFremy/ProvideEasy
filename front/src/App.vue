@@ -3,7 +3,7 @@
     <notifications group="auth"/>
     <AuthLayout v-if='user.length == 0'></AuthLayout>
     <div v-else>
-        <providerMenu v-if='user[0].typeId == null'></providerMenu>
+        <providerMenu v-if='user[0].sector == null'></providerMenu>
         <!-- <clientMenu v-if='user[0].typeId != null'></clientMenu> -->
         <clientMenu v-else></clientMenu>
         <v-content>

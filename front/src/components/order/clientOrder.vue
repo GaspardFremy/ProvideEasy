@@ -54,10 +54,10 @@
         <v-container grid-list-xs,sm,md,lg,xl>
             <v-layout>
                 <v-flex xs12>
-                    <v-btn flat color="primary" outline @click='switchCategory(1)'><img src="@/assets/icon/pain.png" class="category_icon pr-3 pl-0">Pains</v-btn>
-                    <v-btn flat color="primary" outline @click='switchCategory(2)'><img src="@/assets/icon/croissant.png" class="category_icon pr-3 pl-0">Vienoiseries</v-btn>
-                    <v-btn flat color="primary" outline @click='switchCategory(3)'><img src="@/assets/icon/muffin.png" class="category_icon pr-3 pl-0">Pâtisseries</v-btn>
-                    <v-btn flat color="primary" outline @click='switchCategory(4)'><img src="@/assets/icon/autre.png" class="category_icon pr-3 pl-0">Autres</v-btn>
+                    <v-btn flat color="primary" outline @click='switchCategory("pains")'><img src="@/assets/icon/pain.png" class="category_icon pr-3 pl-0">Pains</v-btn>
+                    <v-btn flat color="primary" outline @click='switchCategory("vienoiseries")'><img src="@/assets/icon/croissant.png" class="category_icon pr-3 pl-0">Vienoiseries</v-btn>
+                    <v-btn flat color="primary" outline @click='switchCategory("pâtisseries")'><img src="@/assets/icon/muffin.png" class="category_icon pr-3 pl-0">Pâtisseries</v-btn>
+                    <v-btn flat color="primary" outline @click='switchCategory("autre")'><img src="@/assets/icon/autre.png" class="category_icon pr-3 pl-0">Autres</v-btn>
                 </v-flex>
             </v-layout>
             <v-container   grid-list-xs>
@@ -109,13 +109,7 @@
                                                       </v-flex>
 
                                                     </v-card-title>
-
-
-
                                         </v-card>
-
-
-
                                   </v-flex>
                             </draggable>
                         <!-- </v-layout> -->
@@ -274,7 +268,7 @@
                                                         <v-btn color="warning" flat @click.native="dialog = false">modifier</v-btn>
                                                     </v-flex>
                                                     <v-flex>
-                                                        <v-btn color="info" flat @click.native="dialog = false" @click="takeOrder(cart)">confirmer</v-btn>
+                                                        <router-link to="/user/profile"><v-btn color="info" flat @click.native="dialog = false" @click="takeOrder(cart)">confirmer</v-btn></router-link>
                                                     </v-flex>
                                                 </v-layout>
                                             </v-card-actions>
@@ -329,7 +323,7 @@ export default {
         }
     },
     created () {
-        this.$store.dispatch('loadProducts', 1)
+        this.$store.dispatch('loadProducts', 'pains')
     },
     computed: {
         ...mapState([
@@ -388,14 +382,10 @@ export default {
             const relatedElement = relatedContext.element;
             const draggedElement = draggedContext.element;
             return (!relatedElement || !relatedElement.fixed) && !draggedElement.fixed
-            console.log(draggedContext.element);
-            console.log("ok");
         },
 
         checkMove: function(evt){
             return (evt.draggedContext.element.name!=='apple');
-            console.log("ok");
-
         },
 
         // :todo get product's id within the evt param for setting cart
@@ -423,7 +413,7 @@ export default {
                 saved : this.checkbox,
                 orderName : this.orderName
             }
-            this.$store.commit('takeOrder', order)
+            this.$store.dispatch('takeOrder', order)
         },
         cartIsNotEmpty(){
             return this.cart.length > 0 && this.date != null && this.time != null
@@ -517,7 +507,7 @@ export default {
 }
 
 .borderLeft {
-    border-left: 1px solid grey;
+    /* border-left: 1px solid grey; */
 }
 </style>
 

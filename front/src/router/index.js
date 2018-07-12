@@ -7,6 +7,7 @@ import {Bar} from 'vue-chartjs'
 import Order from '@/components/order/clientOrder'
 import SavedOrder from '@/components/order/clientOrder'
 import Profile from '@/components/profile/profile'
+import ClientProfile from '@/components/profile/clientProfile'
 import ProfileSettings from '@/components/profile/profileSettings'
 import CurrentInvoice from '@/components/invoice/currentInvoice'
 
@@ -47,6 +48,11 @@ export default new Router({
         path: '/profile',
         name: 'profile',
         component: Profile
+        },
+        {
+        path: '/user/profile',
+        name: 'clientProfile',
+        component: ClientProfile
         },
         {
         path: '/profile/settings',

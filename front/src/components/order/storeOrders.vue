@@ -3,7 +3,7 @@
         <v-layout row wrap class="maxheight">
             <v-flex xs3 class="cards_order success">
                     <v-card class="ma-2" v-for="order in orders">
-                        <v-container @click='displayOrder(order.OrderId);displayOrderDetails(order); selected = order;' v-bind:class="{ selected: selected == order, 'ordered' : order.status == 1 }">
+                        <v-container @click='displayOrder(order.OrderId);displayOrderDetails(order); selected = order;' v-bind:class="{ selected: selected == order, 'ordered' : order.status == 'ordered' }">
                             <p>{{order.status}}</p>
                             <p class="title text-xs-center">{{order.clientName}}</p>
                             <p class="subheading ma-0">{{order.Date | moment("calendar").split(" à")[0]}}</p>
@@ -35,8 +35,8 @@
                             <p>{{orderDetails.OrderId}}</p>
 
                         <transition name="fade" mode="out-in">
-                        <v-btn v-if='orderDetails.status === 1' key="1"  color="success" class="mt-4"  @click='switchCategory(orderDetails.OrderId, 2)'>ACCEPTER LA COMMANDE</v-btn>
-                        <v-btn v-if='orderDetails.status === 2' key="2" color="info" class="mt-4"  @click='switchCategory(orderDetails.OrderId, 3), emptyOrderDetails()'><v-icon class="category_icon pr-3 pl-0">done</v-icon>COMMANDE TERMINÉE</v-btn>
+                        <v-btn v-if='orderDetails.status === "ordered"' key="1"  color="success" class="mt-4"  @click='switchStatus(orderDetails.OrderId, "pending")'>ACCEPTER LA COMMANDE</v-btn>
+                        <v-btn v-if='orderDetails.status === "pending"' key="2" color="info" class="mt-4"  @click='switchStatus(orderDetails.OrderId, "done"), emptyOrderDetails()'><v-icon class="category_icon pr-3 pl-0">done</v-icon>COMMANDE TERMINÉE</v-btn>
                         </transition>
 
                     </v-container>
@@ -67,7 +67,6 @@ export default {
     },
     created () {
         this.$store.dispatch('loadOrders')
-
     },
     data(){
         return{
@@ -87,8 +86,8 @@ export default {
         displayOrderDetails(order) {
             this.orderDetails = order
         },
-        switchCategory(orderId, newCategory) {
-            this.$store.dispatch('switchCategory', {orderId, newCategory });
+        switchStatus(orderId, newStatus) {
+            this.$store.dispatch('switchStatus', {orderId, newStatus });
         },
         emptyOrderDetails(){
             this.orderDetails = ''

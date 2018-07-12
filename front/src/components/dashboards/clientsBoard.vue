@@ -65,7 +65,7 @@
                      :items="sector"
                      label="secteur"
                      required
-                     v-model="sectorType"
+                     v-model="sector"
                    ></v-select>
                  </v-flex>
 
@@ -90,7 +90,6 @@
                     :type="show1 ? 'text' : 'password'"
                   ></v-text-field>
                 </v-flex>
-
 
                  <v-flex xs12 sm12>
                  <v-text-field
@@ -133,7 +132,7 @@
                   <td class="text-xs-left">{{ props.item.email }}</td>
                   <td class="text-xs-left">{{ props.item.address }}</td>
                   <td class="text-xs-left">{{ props.item.siret }}</td>
-                  <td class="text-xs-left">{{ props.item.typeId }}</td>
+                  <td class="text-xs-left">{{ props.item.sector }}</td>
                   <td class="text-xs-left">{{ props.item.createdDate | moment("l") }}</td>
                 </template>
               </v-data-table>
@@ -165,11 +164,8 @@ import Notifications from 'vue-notification'
     },
 
     watch: {
-   // à chaque fois que la notif change, cette fonction s'exécutera
        notification: function () {
-           // if (this.notification != null) {
                this.showNotif()
-           // }
        }
      },
 
@@ -183,7 +179,6 @@ import Notifications from 'vue-notification'
               speed: 1000,
               text: this.notification.data.message
             });
-            // this.$store.commit('RESET_NOTIF')
         },
         submitNewClient(){
             let clientInfo = {
@@ -192,12 +187,23 @@ import Notifications from 'vue-notification'
                 siret : this.siret,
                 address : this.address,
                 phone : this.phone,
-                sector : this.sectorType,
+                sector : this.sector,
                 email : this.email,
                 password: this.password,
                 confirmPassword: this.confirmPassword
             }
             this.$store.dispatch('submitNewClient', clientInfo)
+            this.$store.dispatch('loadClients')
+
+            this.password = "null"
+            this.confirmPassword = "null"
+            this.phone = null
+            this.name = null
+            this.email = null
+            this.siret = null
+            this.address = null
+            this.legalName = null
+            this.sector = null
         },
     },
 
@@ -212,7 +218,7 @@ import Notifications from 'vue-notification'
         siret : null,
         address : null,
         legalName : null,
-        sectorType : null,
+        sector : null,
         sector : ['restaurant', 'hôtel', 'entreprise'],
         rules: {
             required: value => !!value || 'Required.',

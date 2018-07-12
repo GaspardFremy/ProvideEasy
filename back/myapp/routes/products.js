@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/:category', function(req, res, next) {
     let category = req.params.category
-      database.sendQuery(`SELECT * FROM products WHERE categoryId LIKE '${category}'`, function (err, results) {
+      database.sendQuery(`SELECT * FROM products WHERE category LIKE '${category}'`, function (err, results) {
           if (err) {
             console.log(err)
           } else {

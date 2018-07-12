@@ -136,7 +136,7 @@ export default {
         right: true,
         rightDrawer: false,
         menuUserActions: [
-            {icon: 'account_circle', title: 'profil', link: '/profile'},
+            {icon: 'account_circle', title: 'profil', link: '/user/profile'},
             {icon: 'settings', title: 'settings', link: '/profile/settings'},
         ],
         menuOrderActions: [

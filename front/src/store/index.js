@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import router from '../router/index'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VuexPersist from 'vuex-persist';
@@ -15,7 +16,8 @@ const vuexLocalStorage = new VuexPersist({
   storage: window.localStorage,
   reducer: (state) => ({
       user: state.user,
-      clients : state.clients
+      clients : state.clients,
+      cart : state.cart
   }),
 })
 
@@ -96,6 +98,7 @@ export const store = new Vuex.Store({
         orderedProducts : [ ],
         orderDetails : [ ],
         savedOrders : [ ],
+        clientOrders : [ ],
         invoices : [
             {
                 id: '1',
@@ -180,23 +183,13 @@ export const store = new Vuex.Store({
          state.products = products
          },
 
-        takeOrder ({ commit }, order) {
-        axios
-            .post('http://localhost:3000/orders/new', {
-            order: order
-            })
-            .then(function (response) {
-            console.log('order taken ! : ');
-            console.log(response);
-            })
-            .catch(function (error) {
-            console.log(error);
-         });
-        },
-
         // CLIENT SAVED ORDERS
         SET_SAVED_ORDERS (state, savedOrders) {
             state.savedOrders = savedOrders
+        },
+
+        SET_CLIENTS_ORDERS (state, clientOrders) {
+            state.clientOrders = clientOrders
         },
 
         // STORE ORDERS
@@ -206,7 +199,6 @@ export const store = new Vuex.Store({
 
         SET_ORDER_DETAILS (state, orderedProducts) {
          state.orderedProducts = orderedProducts
-
          },
 
          SET_NOTIF (state, notifInfo) {
@@ -242,13 +234,15 @@ export const store = new Vuex.Store({
 
     actions: {
         //STORE NEW CLIENT
-        submitNewClient({commit}, clientInfo) {
+        submitNewClient({commit, dispatch}, clientInfo) {
             axios
                 .post('http://localhost:3000/users/new/client', {
                 clientInfo: clientInfo
                 })
                 .then(function (response) {
                 commit('SET_NOTIF', response);
+                dispatch('loadClients')
+
                 // commit('RESET_NOTIF', response);
                 })
                 .catch(function (error) {
@@ -265,6 +259,19 @@ export const store = new Vuex.Store({
             commit('SET_PRODUCTS', products)})
         },
 
+        takeOrder ({ commit }, order) {
+        axios
+            .post('http://localhost:3000/orders/new', {
+            order: order
+            })
+            .then(function (response) {
+            commit('SET_NOTIF', response);
+            })
+            .catch(function (error) {
+            console.log(error);
+         });
+        },
+
         // CLIENT SAVED ORDERS
         loadSavedOrders ({ commit }, payload) {
             axios
@@ -274,17 +281,57 @@ export const store = new Vuex.Store({
                 commit('SET_SAVED_ORDERS', savedOrders)})
         },
 
+        // CLIENT ORDERS
+        loadClientOrders ({commit}, payload) {
+            function getClientOrders({commit}, payload) {
+                axios
+                    .get('http://localhost:3000/orders/client/' + payload)
+                    .then((response) => {
+                        for (let item of response.data) {
+                            item.name = item.name.split(',')
+                            item.quantity = item.quantity.split(',')
+                            item.price = item.price.split(',')
+                            item.total = 0
+                            for (var i = 0; i < item.quantity.length; i++) {
+                                let quantity = item.quantity[i]
+                                let price = item.price[i]
+                                item.total += quantity * price
+                            }
+                            item.productQuantity = item.name.map((e, i) => e + " x " + item.quantity[i])
+                        }
+                        commit('SET_CLIENTS_ORDERS', response.data)
+                    })
+            }
+            //Get the data a first time
+            getClientOrders({commit}, payload);
+
+            //Then update orders every 10s
+            setInterval(() => {
+                getClientOrders({commit}, payload);
+            }, 10000 )
+        },
+
         // STORE ORDERS
         loadOrders ({ commit }) {
+
+            //First request
             axios.get('http://localhost:3000/orders/').then((response) => {
                 commit('SET_STORE_ORDERS', response.data)})
+
+            //Then update orders every 10s
+            setInterval(() => {
+                console.log('updating orders');
+                axios.get('http://localhost:3000/orders/').then((response) => {
+                    commit('SET_STORE_ORDERS', response.data)})
+            }, 10000 )
         },
+
 
         loadOrderedProducts ({ commit }, orderId) {
             axios.get('http://localhost:3000/orders/' + orderId).then((response) => {
                 commit('SET_ORDER_DETAILS', response.data)})
         },
-        switchCategory({commit, dispatch}, payload) {
+        switchStatus({commit, dispatch}, payload) {
             let id = payload.orderId;
             // let newCategory = payload.newCategory
             axios
@@ -368,9 +415,14 @@ export const store = new Vuex.Store({
             return total
         },
 
-        // CLIENT SAVED ORDER
+        // CLIENT SAVED ORDERS
         savedOrders(state) {
             return state.savedOrders
+        },
+
+        // CLIENT ORDERS
+        clientOrders(state) {
+            return state.clientOrders
         },
 
         // STORE ORDERS
