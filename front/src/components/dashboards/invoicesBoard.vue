@@ -35,7 +35,7 @@
 
 <script>
 
-import pieChart from './charts/pieChart'
+import pieChart from './pieChart'
 import { mapGetters } from 'vuex'
 
 export default {

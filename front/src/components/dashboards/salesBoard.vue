@@ -67,7 +67,7 @@
 
 <script>
 
-  import LineChart from './charts/LineChart.js'
+  import LineChart from './LineChart.js'
   import { mapGetters } from 'vuex'
 
   export default {
@@ -106,7 +106,7 @@
     },
 
     mounted () {
-        // this.renderChart(this.datacollection, {responsive: true, maintainAspectRatio: false})
+        this.renderChart(this.datacollection, {responsive: true, maintainAspectRatio: false})
     },
 }
 </script>

@@ -18,10 +18,10 @@
 
 <script>
 
-import lineChart from '../dashboards/charts/lineChart'
+import lineChart from '../dashboards/lineChart'
 import barChart from '../dashboards/charts/barChart'
 import bubbleChart from '../dashboards/charts/bubbleChart'
-import pieChart from '../dashboards/charts/pieChart'
+import pieChart from '../dashboards/pieChart'
 
 export default {
     name: 'VueChartJS',
