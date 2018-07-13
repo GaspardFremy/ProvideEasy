@@ -64,7 +64,7 @@
                             <v-list-tile-action>
                                 <v-icon>calendar_today</v-icon>
                             </v-list-tile-action>
-                            <v-list-tile-title>now</v-list-tile-title>
+                            <v-list-tile-title>Now</v-list-tile-title>
                         </v-list-tile>
                         <v-list-group
                         sub-group
@@ -124,8 +124,8 @@ export default {
             right: true,
             rightDrawer: false,
             menuUserActions: [
-                {icon: 'account_circle', title: 'profil', link: '/user/profile'},
-                {icon: 'settings', title: 'settings', link: '/profile/settings'},
+                {icon: 'account_circle', title: 'Profil', link: '/user/profile'},
+                {icon: 'settings', title: 'Settings', link: '/profile/settings'},
             ],
             menuOrderActions: [
                 {icon: 'add_shopping_cart', title: 'New Order', link: '/new/order'},

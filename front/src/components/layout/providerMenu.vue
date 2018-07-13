@@ -126,9 +126,9 @@ export default {
             right: true,
             rightDrawer: true,
             menuUserActions: [
-                {icon: 'receipt', title: 'orders', link: '/store/orders'},
-                {icon: 'account_circle', title: 'profil', link: '/profile'},
-                {icon: 'settings', title: 'settings', link: '/profile/settings'},
+                {icon: 'receipt', title: 'Orders', link: '/store/orders'},
+                {icon: 'account_circle', title: 'Profil', link: '/profile'},
+                {icon: 'settings', title: 'Settings', link: '/profile/settings'},
             ],
             menuOrderActions: [
                 {icon: 'add_shopping_cart', title: 'New Order', link: '/new/order'},

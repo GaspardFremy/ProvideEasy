@@ -6,7 +6,7 @@
                 <v-flex xs12>
                     <v-data-table
                       :headers="headers"
-                      :items="clients"
+                      :items="clientss"
                       hide-actions
                       class="elevation-2 text-xs-center" >
                       <template slot="items" slot-scope="props">
@@ -50,7 +50,7 @@ export default {
 
     computed: {
         ...mapGetters([
-        'clients'
+        'clientss'
         ])
     },
 

@@ -5,7 +5,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VuexPersist from 'vuex-persist';
 
-const $axios = 'http://localhost:3000';
+const $axios = 'https://provideeasy.ml';
 
 Vue.use(Vuex)
 Vue.use(VueAxios, axios)
@@ -284,6 +284,7 @@ export const store = new Vuex.Store({
 			}, 10000)
 		},
 
+
 		// STORE ORDERS
 		loadOrders({
 			commit
@@ -438,6 +439,9 @@ export const store = new Vuex.Store({
 		//STORE's CLIENTS
 		clients(state) {
 			return state.clients
+		},
+        clientss(state) {
+			return state.clientss
 		},
 
 
