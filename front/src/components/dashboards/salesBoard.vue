@@ -39,10 +39,10 @@
             <v-layout row wrap>
                 <v-flex xs12 sm9>
                     <div>
-                        <line-chart
+                        <!-- <line-chart
                         :chart-data="datacollection"
                         :height="200">
-                        </line-chart>
+                        </line-chart> -->
                     </div>
                 </v-flex>
                 <v-flex xs12 sm3>
@@ -67,15 +67,15 @@
 
 <script>
 
-  import LineChart from './LineChart.js'
+  // import LineChart from './LineChart.js'
   import { mapGetters } from 'vuex'
 
   export default {
 
-
-    components: {
-      LineChart
-    },
+    //
+    // components: {
+    //   LineChart
+    // },
 
 
     computed: {
@@ -106,7 +106,7 @@
     },
 
     mounted () {
-        this.renderChart(this.datacollection, {responsive: true, maintainAspectRatio: false})
+        // this.renderChart(this.datacollection, {responsive: true, maintainAspectRatio: false})
     },
 }
 </script>

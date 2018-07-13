@@ -26,7 +26,7 @@
         <v-container fluid fill-height>
             <v-layout row>
                 <v-flex xs3>
-                    <pieChart/>
+                    <!-- <pieChart/> -->
                 </v-flex>
             </v-layout>
         </v-container>
@@ -35,7 +35,7 @@
 
 <script>
 
-import pieChart from './pieChart'
+// import pieChart from './pieChart'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -43,9 +43,9 @@ export default {
     name: 'VueChartJS',
 
 
-    components: {
-      pieChart
-    },
+    // components: {
+    //   pieChart
+    // },
 
 
     computed: {

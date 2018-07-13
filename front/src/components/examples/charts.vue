@@ -1,4 +1,4 @@
-<template lang="html">
+<!-- <template lang="html">
     <div>
     <h6 class="title primary--text pa-4">Charts examples</h6>
     <v-flex xs12>
@@ -33,4 +33,4 @@ export default {
     }
   }
 
-</script>
+</script> -->
